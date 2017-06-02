@@ -13,11 +13,12 @@ public:
   int allies,enemies,rivals,friends;
   int Str,Dex,End,Edu,Soc,Intt;
   int strDiceMod,dexDiceMod,endDiceMod,eduDiceMod,socDiceMod,inttDiceMod;
-  Player();
+  Player();  
   void DisplaySkills();
   void UpdateDiceMod();
-  bool CheckSkillLevel(std::string skill, int number);
-  bool SetSkill(std::string skill, int num);
+  bool RollOnSkill(std::string skill,int value);
+  bool isSkillUnder(std::string skill, int number);
+  bool SetSkill(std::string skill,int valuechange ); 
   void DisplayStats();
   int RollDice(int x);
   void RollCharacteristics();

@@ -1,3 +1,4 @@
+//TODO: Pull the cin stuff into the do while loops 
 #include <windows.h>
 #include <iostream>
 #include <algorithm>
@@ -332,121 +333,208 @@ int Player::RollDice(int x){
   }
   return randomRoll;
 }
-bool Player::CheckSkillLevel(std::string skill, int number){
+bool Player::RollOnSkill(std::string skill, int value){
+  do{
+   if(skill == "admin"){
+       if(this->skills.admin + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "advocate"){    
+       if(this->skills.advocate + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "animals"){    
+       if(this->skills.animals + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "art"){    
+       if(this->skills.art + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "astrogation"){    
+       if(this->skills.astrogation + this->RollDice(2) >= value){return true}return false; 
+    }else if(skill == "broker"){    
+       if(this->skills.broker + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "carouse"){    
+       if(this->skills.carouse + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "deception"){    
+       if(this->skills.deception + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "diplomat"){    
+       if(this->skills.diplomat + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "drive"){    
+       if(this->skills.driv + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "electronics"){    
+       if(this->skills.electronics + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "engineer"){    
+       if(this->skills.enginee + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "explosives"){    
+       if(this->skills.explosives + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "flyer"){    
+       if(this->skills.flye + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "gambler"){    
+       if(this->skills.gamble + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "gunner"){    
+       if(this->skills.gunne + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "guncombat"){    
+       if(this->skills.gunCombat + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "heavyweapons"){    
+       if(this->skills.heavyWeapons + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "investigate"){    
+       if(this->skills.investigate + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "jackofalltrades"){    
+       if(this->skills.jackOfAllTrades + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "language"){    
+       if(this->skills.languag + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "leadership"){    
+       if(this->skills.leadership + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "mechanic"){    
+       if(this->skills.mechanic + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "medic"){    
+       if(this->skills.medic + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "melee"){    
+       if(this->skills.melee + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "navigation"){    
+       if(this->skills.navigatio + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "persuade"){    
+       if(this->skills.persuade + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "pilot"){    
+       if(this->skills.pilot + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "profession"){    
+       if(this->skills.profession + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "recon"){    
+       if(this->skills.recon + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "science"){    
+       if(this->skills.science + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "seafarer"){    
+       if(this->skills.seafarer + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "stealth"){    
+       if(this->skills.stealth + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "steward"){    
+       if(this->skills.steward + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "streetwise"){    
+       if(this->skills.streetwise + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "survival"){    
+       if(this->skills.survival + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "tactics"){    
+       if(this->skills.tactics + this->RollDice(2) >= value){return true}return false;
+    }else if(skill == "vaccsuit"){    
+       if(this->skills.vaccSuit + this->RollDice(2) >= value){return true}return false;
+    }else {
+      std::cout << "No valid skills was set..."<<std::endl;
+      std::cout <<"Enter a valid skill."<<std::endl;
+      skill = "";
+      return false;
+    }
+  }while(skill == "")
+}
+bool Player::isSkillUnder(std::string skill, int number){
 
+   do{
     if(skill == "admin"){
-       if(skills.admin > number){return true;}    
+       if(skills.admin >= number){return true;}    
        return false;          
     }else if(skill == "advocate"){    
-       if(skills.advocate > number){return true;}
+       if(skills.advocate >= number){return true;}
        return false;
     }else if(skill == "animals"){    
-       if(skills.animals > number){return true;}
+       if(skills.animals >= number){return true;}
        return false;
     }else if(skill == "art"){    
-       if(skills.art > number){return true;}
+       if(skills.art >= number){return true;}
        return false;
     }else if(skill == "astrogation"){    
-       if(skills.astrogation > number){return true;}
+       if(skills.astrogation >= number){return true;}
        return false;
     }else if(skill == "broker"){    
-       if(skills.broker > number){return true;}
+       if(skills.broker >= number){return true;}
        return false;
     }else if(skill == "carouse"){    
-       if(skills.carouse > number){return true;}
+       if(skills.carouse >= number){return true;}
        return false;
     }else if(skill == "deception"){    
-       if(skills.deception > number){return true;}
+       if(skills.deception >= number){return true;}
        return false;
     }else if(skill == "diplomat"){    
-       if(skills.diplomat > number){return true;}
+       if(skills.diplomat >= number){return true;}
        return false;
     }else if(skill == "drive"){    
-       if(skills.drive > number){return true;}
+       if(skills.drive >= number){return true;}
        return false;
     }else if(skill == "electronics"){    
-       if(skills.electronics > number){return true;}
+       if(skills.electronics >= number){return true;}
        return false;
     }else if(skill == "engineer"){    
-       if(skills.engineer > number){return true;}
+       if(skills.engineer >= number){return true;}
        return false;
     }else if(skill == "explosives"){    
-       if(skills.explosives > number){return true;}
+       if(skills.explosives >= number){return true;}
        return false;
     }else if(skill == "flyer"){    
-       if(skills.flyer > number){return true;}
+       if(skills.flyer >= number){return true;}
        return false;
     }else if(skill == "gambler"){    
-       if(skills.gambler > number){return true;}
+       if(skills.gambler >= number){return true;}
        return false;
     }else if(skill == "gunner"){    
-       if(skills.gunner > number){return true;}
+       if(skills.gunner >= number){return true;}
        return false;
     }else if(skill == "guncombat"){    
-       if(skills.gunCombat > number){return true;}
+       if(skills.gunCombat >= number){return true;}
        return false;
     }else if(skill == "heavyweapons"){    
-       if(skills.heavyWeapons > number){return true;}
+       if(skills.heavyWeapons >= number){return true;}
        return false;
     }else if(skill == "investigate"){    
-       if(skills.investigate > number){return true;}
+       if(skills.investigate >= number){return true;}
        return false;
     }else if(skill == "jackofalltrades"){    
-       if(skills.jackOfAllTrades > number){return true;}
+       if(skills.jackOfAllTrades >= number){return true;}
        return false;
     }else if(skill == "language"){    
-       if(skills.language > number){return true;}
+       if(skills.language >= number){return true;}
        return false;
     }else if(skill == "leadership"){    
-       if(skills.leadership > number){return true;}
+       if(skills.leadership >= number){return true;}
        return false;
     }else if(skill == "mechanic"){    
-       if(skills.mechanic > number){return true;}
+       if(skills.mechanic >= number){return true;}
        return false;
     }else if(skill == "medic"){    
-       if(skills.medic > number){return true;}
+       if(skills.medic >= number){return true;}
        return false;
     }else if(skill == "melee"){    
-       if(skills.melee > number){return true;}
+       if(skills.melee >= number){return true;}
        return false;
     }else if(skill == "navigation"){    
-       if(skills.navigation > number){return true;}
+       if(skills.navigation >= number){return true;}
        return false;
     }else if(skill == "persuade"){    
-       if(skills.persuade > number){return true;}
+       if(skills.persuade >= number){return true;}
        return false;
     }else if(skill == "pilot"){    
-       if(skills.pilot > number){return true;}
+       if(skills.pilot >= number){return true;}
        return false;
     }else if(skill == "profession"){    
-       if(skills.profession > number){return true;}
+       if(skills.profession >= number){return true;}
        return false;
     }else if(skill == "recon"){    
-       if(skills.recon > number){return true;}
+       if(skills.recon >= number){return true;}
        return false;
     }else if(skill == "science"){    
-       if(skills.science > number){return true;}
+       if(skills.science >= number){return true;}
        return false;
     }else if(skill == "seafarer"){    
-       if(skills.seafarer > number){return true;}
+       if(skills.seafarer >= number){return true;}
        return false;
     }else if(skill == "stealth"){    
-       if(skills.stealth > number){return true;}
+       if(skills.stealth >= number){return true;}
        return false;
     }else if(skill == "steward"){    
-       if(skills.steward > number){return true;}
+       if(skills.steward >= number){return true;}
        return false;
     }else if(skill == "streetwise"){    
-       if(skills.streetwise > number){return true;}
+       if(skills.streetwise >= number){return true;}
        return false;
     }else if(skill == "survival"){    
-       if(skills.survival > number){return true;}
+       if(skills.survival >= number){return true;}
        return false;
     }else if(skill == "tactics"){    
-       if(skills.tactics > number){return true;}
+       if(skills.tactics >= number){return true;}
        return false;
     }else if(skill == "vaccsuit"){    
-       if(skills.vaccSuit > number){return true;}
+       if(skills.vaccSuit >= number){return true;}
        return false;
     }else {
       std::cout << "No valid skills was set..."<<std::endl;
@@ -454,130 +542,133 @@ bool Player::CheckSkillLevel(std::string skill, int number){
       skill = "";
       return false;
     }
+  }while(skill == "")
 } 
 
-bool Player::SetSkill(std::string skill, int number){
 
+bool Player::SetSkill(std::string skill, int valuechange){
+  do{
     if(skill == "admin"){
-       this->skills.admin = number;
+       this->skills.admin += valuechange;
        return true;       
     }else if(skill == "advocate"){    
-       this->skills.advocate = number;
+       this->skills.advocate += valuechange;
        return true;
     }else if(skill == "animals"){    
-       this->skills.animals = number;
+       this->skills.animals += valuechange;
        return true;
     }else if(skill == "art"){    
-       this->skills.art = number;
+       this->skills.art += valuechange;
        return true;
     }else if(skill == "astrogation"){    
-       this->skills.astrogation = number; 
+       this->skills.astrogation += valuechange; 
        return true;   
     }else if(skill == "broker"){    
-       this->skills.broker = number;
+       this->skills.broker += valuechange;
        return true;
     }else if(skill == "carouse"){    
-       this->skills.carouse = number;
+       this->skills.carouse += valuechange;
        return true;
     }else if(skill == "deception"){    
-       this->skills.deception = number;
+       this->skills.deception += valuechange;
        return true;
     }else if(skill == "diplomat"){    
-       this->skills.diplomat = number;
+       this->skills.diplomat += valuechange;
        return true;
     }else if(skill == "drive"){    
-       this->skills.drive= number;
+       this->skills.drive+= valuechange;
        return true;
     }else if(skill == "electronics"){    
-       this->skills.electronics = number;
+       this->skills.electronics += valuechange;
        return true;
     }else if(skill == "engineer"){    
-       this->skills.engineer= number;
+       this->skills.engineer+= valuechange;
        return true;
     }else if(skill == "explosives"){    
-       this->skills.explosives = number;
+       this->skills.explosives += valuechange;
        return true;
     }else if(skill == "flyer"){    
-       this->skills.flyer= number;
+       this->skills.flyer+= valuechange;
        return true;
     }else if(skill == "gambler"){    
-       this->skills.gambler= number;
+       this->skills.gambler+= valuechange;
        return true;
     }else if(skill == "gunner"){    
-       this->skills.gunner= number;
+       this->skills.gunner+= valuechange;
        return true;
     }else if(skill == "guncombat"){    
-       this->skills.gunCombat = number;
+       this->skills.gunCombat += valuechange;
        return true;
     }else if(skill == "heavyweapons"){    
-       this->skills.heavyWeapons = number;
+       this->skills.heavyWeapons += valuechange;
        return true;
     }else if(skill == "investigate"){    
-       this->skills.investigate = number;
+       this->skills.investigate += valuechange;
        return true;
     }else if(skill == "jackofalltrades"){    
-       this->skills.jackOfAllTrades = number;
+       this->skills.jackOfAllTrades += valuechange;
        return true;
     }else if(skill == "language"){    
-       this->skills.language= number;
+       this->skills.language+= valuechange;
        return true;
     }else if(skill == "leadership"){    
-       this->skills.leadership = number;
+       this->skills.leadership += valuechange;
        return true;
     }else if(skill == "mechanic"){    
-       this->skills.mechanic = number;
+       this->skills.mechanic += valuechange;
        return true;
     }else if(skill == "medic"){    
-       this->skills.medic = number;
+       this->skills.medic += valuechange;
        return true;
     }else if(skill == "melee"){    
-       this->skills.melee = number;
+       this->skills.melee += valuechange;
        return true;
     }else if(skill == "navigation"){    
-       this->skills.navigation= number;
+       this->skills.navigation+= valuechange;
        return true;
     }else if(skill == "persuade"){    
-       this->skills.persuade = number;
+       this->skills.persuade += valuechange;
        return true;
     }else if(skill == "pilot"){    
-       this->skills.pilot = number;
+       this->skills.pilot += valuechange;
        return true;
     }else if(skill == "profession"){    
-       this->skills.profession = number;
+       this->skills.profession += valuechange;
        return true;
     }else if(skill == "recon"){    
-       this->skills.recon = number;
+       this->skills.recon += valuechange;
        return true;
     }else if(skill == "science"){    
-       this->skills.science = number;
+       this->skills.science += valuechange;
        return true;
     }else if(skill == "seafarer"){    
-       this->skills.seafarer = number;
+       this->skills.seafarer += valuechange;
        return true;
     }else if(skill == "stealth"){    
-       this->skills.stealth = number;
+       this->skills.stealth += valuechange;
        return true;
     }else if(skill == "steward"){    
-       this->skills.steward = number;
+       this->skills.steward += valuechange;
        return true;
     }else if(skill == "streetwise"){    
-       this->skills.streetwise = number;
+       this->skills.streetwise += valuechange;
        return true;
     }else if(skill == "survival"){    
-       this->skills.survival = number;
+       this->skills.survival += valuechange;
        return true;
     }else if(skill == "tactics"){    
-       this->skills.tactics = number;
+       this->skills.tactics += valuechange;
        return true;
     }else if(skill == "vaccsuit"){    
-       this->skills.vaccSuit = number;
+       this->skills.vaccSuit += valuechange;
        return true;
     }else {
       std::cout << "No valid skills was set..."<<std::endl;
       std::cout <<"Enter a valid skill."<<std::endl;
       skill = "";
       return false;
-    }
+    }while(skill == "");
+  }
 } 
  
 

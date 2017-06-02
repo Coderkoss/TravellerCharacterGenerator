@@ -1,4 +1,5 @@
 //TODO: Setting a default screen size
+//TODO: Player.cpp line 1
 #define _WIN32_WINNT 0x0501
 #include <conio.h>
 #include <iostream>
@@ -68,9 +69,7 @@ int main(){
             // PCE_levelOneSkill();
             // //Increase EDU by +1           
             player.Edu += 1;
-            bool check;
-            check = player.CheckSkillLevel("admin",-2);
-            std::cout << check<<std::endl;
+           
 
             //PCE_Event();
             //roll for graduation 7 or higher if you roll 11 you get honours
@@ -293,21 +292,28 @@ int main(){
       std::cout<<"Choose any skill for level one besides jackofalltrades"<<std::endl;
       do{
         getline(std::cin,tempSkill);
-        if(tempSkill == "jackofalltrades"){tempSkill = "";}
-
-      }while(!player.SetSkill(tempSkill,0)); 
+        if(tempSkill == "jackofalltrades" && 
+          player.isSkillUnder(tempSkill,0)){tempSkill = "";}
+        
+      }while(!player.SetSkill(tempSkill,1)); 
     }
     
     break;
     case 10:
-    player.uniEvent  = events[8];
-    std::cout << player.uniEvent << std::endl;
-    /*
-    roll 9+ on any skill
-      if true gain a level in that skill
-      also gain a rival  
-    */
-   
+    {
+      player.uniEvent  = events[8];
+      std::cout << player.uniEvent << std::endl;
+      std::cout << "Choose the skill you want to Roll 9+ on"<<std::endl;
+      std::string learnedSkill;
+      std::getline(std::cin,learnedSkill);
+      player.SetSkill(learnedSkill,1);
+      /*
+      roll 9+ on any skill
+        if true gain a level in that skill
+        also gain a rival  
+      */
+
+    }
     break;
     case 11:
     player.uniEvent  = events[9];
@@ -343,11 +349,11 @@ int main(){
 
 //Console helper methods
   void SetBackgroundSkills(){
-  //TODO: see if I can get this to work with the zeroskillCheck with this method
-  player.DisplaySkills();
-  player.eduDiceMod = 0;
-  int numberOfSkills;
-  switch (player.eduDiceMod){
+    //TODO: see if I can get this to work with the zeroskillCheck with this method
+    player.DisplaySkills();
+    player.eduDiceMod = 0;
+    int numberOfSkills;
+    switch (player.eduDiceMod){
    case -3:
    numberOfSkills = 0;
    break;
@@ -450,96 +456,96 @@ int main(){
   SetConsoleTextAttribute(hConsole,num);
   }
   void FontSize(int x, int y,int fontWeight){
-  CONSOLE_FONT_INFOEX cfi;
-  cfi.cbSize = sizeof(cfi);
-  cfi.nFont = 0;
-  cfi.dwFontSize.X = x;
-  cfi.dwFontSize.Y = y;
-  cfi.FontFamily = FF_DONTCARE;
-  cfi.FontWeight =fontWeight;
-  //wcscpy(cfi.FaceName, L"Consolas");//Chose your font
-  SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE),FALSE,&cfi);
+    CONSOLE_FONT_INFOEX cfi;
+    cfi.cbSize = sizeof(cfi);
+    cfi.nFont = 0;
+    cfi.dwFontSize.X = x;
+    cfi.dwFontSize.Y = y;
+    cfi.FontFamily = FF_DONTCARE;
+    cfi.FontWeight =fontWeight;
+    //wcscpy(cfi.FaceName, L"Consolas");//Chose your font
+    SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE),FALSE,&cfi);
   }
   void ResetTextAttr(){
-  SetColor(15);
-  FontSize(DEFAULT_FONT_SIZE_X,DEFAULT_FONT_SIZE_Y,NORMAL);
+    SetColor(15);
+    FontSize(DEFAULT_FONT_SIZE_X,DEFAULT_FONT_SIZE_Y,NORMAL);
   }
   void ResetConsole(){
     ResetTextAttr();
   }
   void SetConsoleSize(){
-  HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
-  COORD size;
-  size.X = 100;
-  size.Y = 40;
-  SMALL_RECT rect;
-  rect.Top = 0;
-  rect.Left = 0;
-  rect.Bottom = size.Y;
-  rect.Right = size.X;
+   HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+   COORD size;
+   size.X = 100;
+   size.Y = 40;
+   SMALL_RECT rect;
+   rect.Top = 0;
+   rect.Left = 0;
+   rect.Bottom = size.Y;
+   rect.Right = size.X;
 
-  SetConsoleScreenBufferSize(console,size);
-  SetConsoleWindowInfo(console,1,&rect);
+    SetConsoleScreenBufferSize(console,size);
+    SetConsoleWindowInfo(console,1,&rect);
   //getch();
   }
   
   void cls( )
   {
-   HANDLE hConsole;
-   hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-   COORD coordScreen = { 0, 0 };    // home for the cursor 
-   DWORD cCharsWritten;
-   CONSOLE_SCREEN_BUFFER_INFO csbi; 
-   DWORD dwConSize;
-   //the number of character cells in the current buffer. 
+     HANDLE hConsole;
+     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+     COORD coordScreen = { 0, 0 };    // home for the cursor 
+     DWORD cCharsWritten;
+     CONSOLE_SCREEN_BUFFER_INFO csbi; 
+     DWORD dwConSize;
+     //the number of character cells in the current buffer. 
   
-   if( !GetConsoleScreenBufferInfo( hConsole, &csbi ))
-   {
+      if( !GetConsoleScreenBufferInfo( hConsole, &csbi ))
+      {
+         return;
+      }
+     dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
+    // Fill the entire screen with blanks.
+    if( !FillConsoleOutputCharacter( hConsole,        // Handle to console screen buffer 
+                                     (TCHAR) ' ',     // Character to write to the buffer
+                                     dwConSize,       // Number of cells to write 
+                                     coordScreen,     // Coordinates of first cell 
+                                     &cCharsWritten ))// Receive number of characters written
+    {
+        return;
+    }
+    // Get the current text attribute.
+    if( !GetConsoleScreenBufferInfo( hConsole, &csbi ))
+    {
       return;
-   }
-   dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
-   // Fill the entire screen with blanks.
-   if( !FillConsoleOutputCharacter( hConsole,        // Handle to console screen buffer 
-                                    (TCHAR) ' ',     // Character to write to the buffer
-                                    dwConSize,       // Number of cells to write 
-                                    coordScreen,     // Coordinates of first cell 
-                                    &cCharsWritten ))// Receive number of characters written
-   {
-      return;
-   }
-   // Get the current text attribute.
-   if( !GetConsoleScreenBufferInfo( hConsole, &csbi ))
-   {
-      return;
-   }
-   // Set the buffer's attributes accordingly.
-   if( !FillConsoleOutputAttribute( hConsole,         // Handle to console screen buffer 
+    }
+    // Set the buffer's attributes accordingly.
+    if( !FillConsoleOutputAttribute( hConsole,         // Handle to console screen buffer 
                                     csbi.wAttributes, // Character attributes to use
                                     dwConSize,        // Number of cells to set attribute 
                                     coordScreen,      // Coordinates of first cell 
                                     &cCharsWritten )) // Receive number of characters written
-   {
-      return;
-   }
-   // Put the cursor at its home coordinates.
-   SetConsoleCursorPosition( hConsole, coordScreen );
+    {
+       return;
+    }
+    // Put the cursor at its home coordinates.
+    SetConsoleCursorPosition( hConsole, coordScreen );
   }
   bool Choice(){
 
-  std::cout<< "Enter y = Yes or n = No"<<std::endl;
-  char pick = ' ';
-  while(pick != 'n'&& pick != 'y' && 
-        pick != 'Y'&& pick != 'N') {
-    std::cin >> pick;
-    if(pick != 'n' && pick != 'y' && 
-        pick != 'Y'&& pick != 'N')
-    {
-      std::cout << "You need to Enter a valid pick; n or y"<<std::endl;      
-    }
-  }
-  if(pick != 'n' && pick != 'N'){
-   return true;
-  }else{
-   return false;    
-  }
+   std::cout<< "Enter y = Yes or n = No"<<std::endl;
+   char pick = ' ';
+   while(pick != 'n'&& pick != 'y' && 
+         pick != 'Y'&& pick != 'N') {
+     std::cin >> pick;
+     if(pick != 'n' && pick != 'y' && 
+         pick != 'Y'&& pick != 'N')
+     {
+       std::cout << "You need to Enter a valid pick; n or y"<<std::endl;      
+     }
+   }
+   if(pick != 'n' && pick != 'N'){
+    return true;
+   }else{
+    return false;    
+   }
   }
